@@ -1,1 +1,1 @@
-A soundcloud where you can listen/download and play remotely your music on a nodejs server
+A soundcloud where you can listen/download your music on your phone or play it remotely on a nodejs server
