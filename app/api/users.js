@@ -12,5 +12,5 @@ export const getUserRepostsAPI = ({page, limit}) => {
 
 export const getUserLikesAPI = ({page, limit}) => {
   return fetchAPI(`https://api-v2.soundcloud.com/users/${USER_ID}/likes?limit=${limit}&offset=${page * limit}&client_id=${CLIENT_ID}`)
-  .then(reposts => reposts.collection);
+  .then(likes => likes.collection);
 }

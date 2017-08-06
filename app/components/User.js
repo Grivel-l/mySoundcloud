@@ -45,8 +45,6 @@ class User extends Component {
   }
 
   render() {
-    console.log('this.props.user', this.props.user);
-    console.log('This.props.reposts', this.props.reposts);
     const {user} = this.props;
     return (
       <View style={styles.container}>
