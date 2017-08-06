@@ -6,6 +6,8 @@ import {
   Image
 } from 'react-native';
 
+import Tracklist from './Tracklist';
+
 class User extends Component {
   constructor(props) {
     super(props);
@@ -16,21 +18,25 @@ class User extends Component {
   }
 
   render() {
-    console.log('this.props.user', this.props.user)
+    console.log('this.props.user', this.props.user);
+    console.log('This.props.reposts', this.props.reposts);
     const {user} = this.props;
     return (
       <View style={styles.container}>
         {Object.keys(user).length > 0 &&
           <View style={styles.subContainer}>
-            <Image
-              source={{uri: user.avatar_url}}
-              style={styles.avatar}
-            />
-            <View>
-              <Text>{this.toUpperCase(user.username)}</Text>
-              <Text>{`Followers: ${user.followers_count}`}</Text>
-              <Text>{`Following: ${user.followings_count}`}</Text>
+            <View style={styles.row}>
+              <Image
+                source={{uri: user.avatar_url}}
+                style={styles.avatar}
+              />
+              <View>
+                <Text>{this.toUpperCase(user.username)}</Text>
+                <Text>{`Followers: ${user.followers_count}`}</Text>
+                <Text>{`Following: ${user.followings_count}`}</Text>
+              </View>
             </View>
+            <Tracklist tracks={this.props.reposts} />
           </View>
         }
       </View>
@@ -46,13 +52,15 @@ const styles = StyleSheet.create({
   },
   subContainer: {
     flex: 1,
-    flexDirection: 'row'
   },
   avatar: {
     width: 100,
     height: 100,
     borderRadius: 5,
     marginRight: 5
+  },
+  row: {
+    flexDirection: 'row'
   }
 });
 

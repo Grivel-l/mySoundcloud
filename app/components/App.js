@@ -15,7 +15,10 @@ class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <User user={this.props.user} />
+        <User
+          user={this.props.user}
+          reposts={this.props.reposts}
+        />
       </View>
     );
   }

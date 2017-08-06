@@ -1,11 +1,15 @@
 import {connect} from 'react-redux';
 
 import App from '../components/App';
-import {getUser} from '../selectors/users';
+import {
+  getUser,
+  getUserReposts
+} from '../selectors/users';
 
 const mapStateToProps = state => {
   return {
-      user: getUser(state)
+      user: getUser(state),
+      reposts: getUserReposts(state)
   };
 };
 

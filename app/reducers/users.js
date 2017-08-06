@@ -1,9 +1,11 @@
 import {
-  USER_GETTED
+  USER_GETTED,
+  USER_REPOSTS_GETTED
 } from '../actions/users';
 
 const initialState = {
-  user: {}
+  user: {},
+  reposts: []
 };
 
 const users = (state = initialState, {type, payload}) => {
@@ -12,6 +14,11 @@ const users = (state = initialState, {type, payload}) => {
       return {
         ...state,
         user: payload.user
+      }
+    case USER_REPOSTS_GETTED:
+      return {
+        ...state,
+        reposts: [...state.reposts, ...payload.reposts]
       }
     default:
       return state;
