@@ -1,18 +1,21 @@
 import {connect} from 'react-redux';
 
-import {APP_GET_PROPS} from '../actions/app';
-import {getDefaultProps} from '../selectors/app';
 import App from '../components/App';
+import {
+  getUser,
+  getUserReposts,
+  getUserLikes
+} from '../selectors/users';
 
-const mapStateToProps = (state) => {
-  const defaultProps = getDefaultProps(state);
+const mapStateToProps = state => {
   return {
-    defaultProps
+      user: getUser(state),
+      reposts: getUserReposts(state),
+      likes: getUserLikes(state),
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  getProps: () => dispatch({type: APP_GET_PROPS})
+const mapDispatchToProps = dispatch => ({
 });
 
 const app = connect(mapStateToProps, mapDispatchToProps)(App);
