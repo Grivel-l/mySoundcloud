@@ -13,11 +13,13 @@ class App extends Component {
   }
 
   render() {
+    console.log('Likes', this.props.likes);
     return (
       <View style={styles.container}>
         <User
           user={this.props.user}
           reposts={this.props.reposts}
+          likes={this.props.likes}
         />
       </View>
     );

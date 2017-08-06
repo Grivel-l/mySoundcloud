@@ -3,18 +3,45 @@ import {
   View,
   Text,
   StyleSheet,
-  Image
+  Image,
+  TouchableHighlight
 } from 'react-native';
 
 import Tracklist from './Tracklist';
+import Colors from '../styles/colors';
 
 class User extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      categorie: 'reposts'
+    };
   }
 
   toUpperCase(content) {
     return content.substring(0, 1).toUpperCase() + content.substring(1);
+  }
+
+  renderCategorie(categorie) {
+    return (
+      <TouchableHighlight
+        style={styles.categorie}
+        underlayColor={'transparent'}
+        onPress={() => {
+          if (this.state.categorie !== categorie) {
+            this.setState({categorie});
+          }
+        }}
+      >
+        <Text style={[
+          styles.categorieText,
+          categorie === this.state.categorie && {color: Colors.mainColor}
+        ]}>
+          {this.toUpperCase(categorie)}
+        </Text>
+      </TouchableHighlight>
+    )
   }
 
   render() {
@@ -24,7 +51,6 @@ class User extends Component {
     return (
       <View style={styles.container}>
         {Object.keys(user).length > 0 &&
-          <View style={styles.subContainer}>
             <View style={styles.row}>
               <Image
                 source={{uri: user.avatar_url}}
@@ -36,9 +62,12 @@ class User extends Component {
                 <Text>{`Following: ${user.followings_count}`}</Text>
               </View>
             </View>
-            <Tracklist tracks={this.props.reposts} />
-          </View>
         }
+        <View style={styles.categories}>
+          {this.renderCategorie('reposts')}
+          {this.renderCategorie('likes')}
+        </View>
+        <Tracklist tracks={this.props[this.state.categorie]} />
       </View>
     );
   }
@@ -48,10 +77,24 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
-    padding: 20
+    padding: 10
   },
-  subContainer: {
+  categories: {
+    width: '100%',
+    height: 60,
+    borderBottomColor: Colors.mainColor,
+    borderBottomWidth: 5,
+    flexDirection: 'row',
+    marginBottom: 5
+  },
+  categorie: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  categorieText: {
+    fontWeight: 'bold',
+    fontSize: 20
   },
   avatar: {
     width: 100,

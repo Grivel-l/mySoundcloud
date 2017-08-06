@@ -7,6 +7,8 @@ import {
   ScrollView
 } from 'react-native';
 
+import Colors from '../styles/colors';
+
 class Tracklist extends Component {
   constructor(props) {
     super(props);
@@ -18,16 +20,30 @@ class Tracklist extends Component {
 
   renderTracks() {
     return (
-      <ScrollView style={{backgroundColor: 'purple', height: '80%'}}>
+      <ScrollView>
         {this.props.tracks.map(({track}, index) => {
-          console.log('Track', track);
           if (track !== undefined) {
             return (
-              <View key={`Track${index}`} style={styles.track}>
+              <View
+                key={`Track${index}`}
+                style={styles.track}
+              >
                 <Image
                   style={styles.artwork}
-                  source={{uri: track.artwork_url}}
+                  source={{uri: track.artwork_url || track.user.avatar_url}}
                 />
+                <View style={styles.rowContainer}>
+                  <View style={styles.firstRow}>
+                    <Text style={styles.h2}>{track.user.username}</Text>
+                    <Text style={styles.h2}>{track.duration}</Text>
+                  </View>
+                  <View>
+                    <Text>{track.title}</Text>
+                  </View>
+                  <View>
+                    <Text style={styles.h2}>{track.playback_count}</Text>
+                  </View>
+                </View>
               </View>
             );
           }
@@ -46,13 +62,29 @@ class Tracklist extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
   track: {
-    marginBottom: 5
+    marginBottom: 10,
+    flexDirection: 'row'
   },
   artwork: {
     borderRadius: 5,
-    width: 100,
-    height: 100
+    width: 70,
+    height: 70,
+    marginRight: 5
+  },
+  firstRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  h2: {
+    color: Colors.h2
+  },
+  rowContainer: {
+    flex: 1,
+    justifyContent: 'space-between'
   }
 });
 

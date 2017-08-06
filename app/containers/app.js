@@ -3,13 +3,15 @@ import {connect} from 'react-redux';
 import App from '../components/App';
 import {
   getUser,
-  getUserReposts
+  getUserReposts,
+  getUserLikes
 } from '../selectors/users';
 
 const mapStateToProps = state => {
   return {
       user: getUser(state),
-      reposts: getUserReposts(state)
+      reposts: getUserReposts(state),
+      likes: getUserLikes(state),
   };
 };
 

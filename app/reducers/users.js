@@ -1,11 +1,13 @@
 import {
   USER_GETTED,
-  USER_REPOSTS_GETTED
+  USER_REPOSTS_GETTED,
+  USER_LIKES_GETTED
 } from '../actions/users';
 
 const initialState = {
   user: {},
-  reposts: []
+  reposts: [],
+  likes: []
 };
 
 const users = (state = initialState, {type, payload}) => {
@@ -19,6 +21,11 @@ const users = (state = initialState, {type, payload}) => {
       return {
         ...state,
         reposts: [...state.reposts, ...payload.reposts]
+      }
+    case USER_LIKES_GETTED:
+      return {
+        ...state,
+        likes: [...state.likes, ...payload.likes]
       }
     default:
       return state;
