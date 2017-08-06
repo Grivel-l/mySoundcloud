@@ -10,10 +10,6 @@ class App extends Component {
     super(props);
   }
 
-  componentDidMount() {
-    this.props.getProps();
-  }
-
   render() {
     return (
       <View style={styles.container}>
