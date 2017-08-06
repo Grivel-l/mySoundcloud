@@ -5,6 +5,8 @@ import {
   StyleSheet
 } from 'react-native';
 
+import User from './User';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -17,9 +19,7 @@ class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {(this.props.defaultProps !== undefined)
-          ? (<Text style={styles.message}>{this.props.defaultProps}</Text>)
-          : (<Text style={styles.message}>{'Props are loading...'}</Text>)}
+        <User user={this.props.user} />
       </View>
     );
   }
