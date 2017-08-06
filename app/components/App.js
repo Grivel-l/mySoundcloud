@@ -10,6 +10,10 @@ class App extends Component {
     super(props);
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log('NextProps', nextProps);
+  }
+
   render() {
     return (
       <View style={styles.container}>

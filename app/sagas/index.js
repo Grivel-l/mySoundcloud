@@ -1,9 +1,9 @@
 import {all, fork} from 'redux-saga/effects'
 
-import app from './app';
+import users from './users';
 
 export default function* root() {
   yield all([
-    fork(app)
+    fork(users)
   ]);
 }

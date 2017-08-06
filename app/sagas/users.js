@@ -1,5 +1,5 @@
 import React from 'react';
-import {take, put, call, fork, takeEvery, all} from 'redux-saga/effects'
+import {put, call, fork, takeEvery, all} from 'redux-saga/effects'
 import {delay} from 'redux-saga';
 
 import {getUserAPI} from '../api/users';
