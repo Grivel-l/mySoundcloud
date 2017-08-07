@@ -1,3 +1,7 @@
 module.exports = app => {
-  console.log('PlayMusic loaded !');
+  app.get('/music/play', (req, res) => {
+    console.log(req.query.client_id);
+    console.log(req.query.idTrack);
+    res.send('');
+  });
 };
