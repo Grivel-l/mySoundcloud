@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-module.exports = app => {
+module.exports = (app, sockets) => {
   const loadRoutes = (additionalPath = '') => {
     const path = `${__dirname}/.${additionalPath}`
     fs.readdirSync(path).map(file => {
@@ -9,7 +9,7 @@ module.exports = app => {
           loadRoutes(`${additionalPath}/${file}`);
         } else {
           if (file.includes('.route.js')) {
-            require(`${path}/${file}`)(app);
+            require(`${path}/${file}`)(app, sockets);
           }
         }
       }

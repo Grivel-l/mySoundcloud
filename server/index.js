@@ -15,5 +15,5 @@ http.listen(3000, () => {
   app.set('view engine', 'ejs');
 
   loadSockets(sockets);
-  routes(app);
+  routes(app, sockets);
 });
