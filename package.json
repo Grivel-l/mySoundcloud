@@ -4,8 +4,8 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "node server/index.js",
-    "app": "node Application/node_modules/react-native/local-cli/cli.js start"
+    "server": "nodemon server/index.js",
+    "app": "node application/node_modules/react-native/local-cli/cli.js start"
   },
   "repository": {
     "type": "git",

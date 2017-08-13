@@ -18,6 +18,9 @@ class Tracklist extends Component {
     this.state = {
       showModal: false
     };
+
+    this.focusedTrack = null;
+    this.sendToServer = this.sendToServer.bind(this, this.focusedTrack);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -25,7 +28,7 @@ class Tracklist extends Component {
   }
 
   openModal(track) {
-    console.log('Track', track);
+    this.focusedTrack = track.id;
     this.setState({showModal: true});
   }
 
@@ -67,6 +70,10 @@ class Tracklist extends Component {
     )
   }
 
+  sendToServer() {
+    this.props.sendToServer({idTrack: this.focusedTrack});
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -82,9 +89,13 @@ class Tracklist extends Component {
             onPress={() => this.setState({showModal: false})}
           >
             <View style={styles.subModal}>
-              <View style={styles.modalTextWrapper}>
+              <TouchableHighlight
+                style={styles.modalTextWrapper}
+                onPress={this.sendToServer}
+                underlayColor={'rgba(0, 0, 0, 0.3)'}
+              >
                 <Text style={styles.modalText}>{'Play it on the server'}</Text>
-              </View>
+              </TouchableHighlight>
               <View style={styles.modalTextWrapper}>
                 <Text style={styles.modalText}>{'Play it on the phone'}</Text>
               </View>

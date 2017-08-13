@@ -7,7 +7,7 @@ import {
   TouchableHighlight
 } from 'react-native';
 
-import Tracklist from './Tracklist';
+import Tracklist from '../containers/tracklist';
 import Colors from '../styles/colors';
 
 class User extends Component {
