@@ -17,4 +17,5 @@ module.exports = app => {
   };
 
   loadRoutes();
+  console.log('All routes loaded');
 };
