@@ -70,7 +70,8 @@ const styles = StyleSheet.create({
     height: 50,
     alignSelf: 'stretch',
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: Colors.lightBlack
   },
   input: {
     width: '80%',
