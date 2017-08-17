@@ -14,6 +14,7 @@ class App extends Component {
   }
 
   renderContent() {
+    console.log('This.props.reposts', this.props.reposts);
     if (this.props.search.length === 0) {
       return (
         <User

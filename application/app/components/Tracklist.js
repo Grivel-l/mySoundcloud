@@ -37,7 +37,7 @@ class Tracklist extends Component {
       <ScrollView>
         {this.props.tracks.map((fullTrack, index) => {
           const track = fullTrack.track || fullTrack;
-          if (track !== undefined) {
+          if (track !== undefined && track.type !== 'playlist') {
             return (
               <TouchableHighlight
                 key={`Track${index}`}
