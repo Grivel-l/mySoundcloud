@@ -43,7 +43,7 @@ class User extends Component {
         >
           <Text style={[
             styles.categorieText,
-            categorie === this.state.categorie && {color: Colors.mainColor}
+            {color: categorie === this.state.categorie ? Colors.mainColor : Colors.notSelected}
           ]}>
             {this.toUpperCase(categorie)}
           </Text>
