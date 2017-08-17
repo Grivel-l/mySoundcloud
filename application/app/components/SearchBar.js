@@ -26,17 +26,23 @@ class SearchBar extends Component {
     this.props.searchMusic(this.input._lastNativeText);
   }
 
-  render() {
-    return (
-      <View style={styles.container}>
-        {this.props.showBack &&
+  renderBackButton() {
+    if (this.props.showBack) {
+      return (
         <TouchableHighlight
           style={[styles.searchButton, {marginRight: 0}]}
           onPress={this.back}
         >
           <View />
         </TouchableHighlight>
-      }
+      );
+    }
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        {this.renderBackButton()}
         <TextInput
           style={[styles.input, this.props.showBack && {margin: 5}]}
           placeholder={'Search...'}
@@ -60,7 +66,7 @@ class SearchBar extends Component {
 const styles = StyleSheet.create({
   container: {
     height: 50,
-    width: '100%',
+    alignSelf: 'stretch',
     flexDirection: 'row',
     alignItems: 'center'
   },
