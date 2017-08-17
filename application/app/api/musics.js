@@ -1,4 +1,4 @@
-import {CLIENT_ID,  USER_ID, SERVER_IP} from '../config/index';
+import {CLIENT_ID,  USER_ID, SERVER_IP, API_URL} from '../config/index';
 import fetchAPI from './index';
 
 export const sendMusicAPI = ({idTrack}) => {
@@ -6,5 +6,6 @@ export const sendMusicAPI = ({idTrack}) => {
 };
 
 export const searchMusicAPI = ({query}) => {
-  return fetchAPI(`http://${SERVER_IP}/tracks?q=${query}`);
+  console.log('Query', query)
+  return fetchAPI(`${API_URL}/tracks?q=${query}`);
 };

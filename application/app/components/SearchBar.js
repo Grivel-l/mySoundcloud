@@ -18,7 +18,7 @@ class SearchBar extends Component {
   }
 
   search() {
-    console.log(this.input._lastNativeText);
+    this.props.searchMusic(this.input._lastNativeText);
   }
 
   render() {
