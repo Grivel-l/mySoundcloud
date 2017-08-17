@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: Colors['lightBlack']
+    backgroundColor: Colors.lightBlack
   },
   input: {
     width: '80%',
