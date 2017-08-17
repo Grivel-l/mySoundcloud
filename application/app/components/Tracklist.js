@@ -35,8 +35,8 @@ class Tracklist extends Component {
   renderTracks() {
     return (
       <ScrollView>
-        {this.props.tracks.map((allTrack, index) => {
-          const track = allTrack.track || allTrack;
+        {this.props.tracks.map((fullTrack, index) => {
+          const track = fullTrack.track || fullTrack;
           if (track !== undefined) {
             return (
               <TouchableHighlight

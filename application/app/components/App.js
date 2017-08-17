@@ -15,7 +15,6 @@ class App extends Component {
 
   renderContent() {
     if (this.props.search.length === 0) {
-      console.log('Reposts', this.props.reposts);
       return (
         <User
           user={this.props.user}
@@ -24,7 +23,6 @@ class App extends Component {
         />
       );
     } else {
-      console.log('Tracks', this.props.search);
       return (
         <View style={styles.searchContainer}>
           <Tracklist tracks={this.props.search} />
@@ -36,7 +34,7 @@ class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <SearchBar />
+        <SearchBar showBack={this.props.search.length > 0} />
         {this.renderContent()}
       </View>
     );

@@ -15,6 +15,11 @@ class SearchBar extends Component {
     this.input = null;
 
     this.search = this.search.bind(this);
+    this.back = this.back.bind(this);
+  }
+
+  back() {
+    this.props.resetSearch();
   }
 
   search() {
@@ -24,8 +29,16 @@ class SearchBar extends Component {
   render() {
     return (
       <View style={styles.container}>
+        {this.props.showBack &&
+        <TouchableHighlight
+          style={[styles.searchButton, {marginRight: 0}]}
+          onPress={this.back}
+        >
+          <View />
+        </TouchableHighlight>
+      }
         <TextInput
-          style={styles.input}
+          style={[styles.input, this.props.showBack && {margin: 5}]}
           placeholder={'Search...'}
           ref={ref => {
             if (this.input === null) {
@@ -34,7 +47,7 @@ class SearchBar extends Component {
           }}
         />
         <TouchableHighlight
-          style={styles.searchButton}
+          style={[styles.searchButton, {marginLeft: 0}]}
           onPress={this.search}
         >
           <View />
@@ -62,8 +75,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors['mainColor'],
     alignSelf: 'stretch',
     flex: 1,
-    margin: 7,
-    marginLeft: 0,
+    margin: 10,
     borderRadius: 5
   }
 });

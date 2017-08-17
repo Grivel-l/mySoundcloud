@@ -6,6 +6,5 @@ export const sendMusicAPI = ({idTrack}) => {
 };
 
 export const searchMusicAPI = ({query}) => {
-  console.log('Query', query)
   return fetchAPI(`${API_URL}/tracks?q=${query}`);
 };
