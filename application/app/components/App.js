@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 
 import User from './User';
+import SearchBar from './SearchBar';
 
 class App extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class App extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <SearchBar />
         <User
           user={this.props.user}
           reposts={this.props.reposts}
