@@ -78,7 +78,6 @@ const styles = StyleSheet.create({
     padding: 10
   },
   categories: {
-    width: '100%',
     height: 60,
     borderBottomColor: Colors.mainColor,
     borderBottomWidth: 5,

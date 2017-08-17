@@ -6,12 +6,14 @@ import {
   getUserReposts,
   getUserLikes
 } from '../selectors/users';
+import {getSearchedTracks} from '../selectors/musics';
 
 const mapStateToProps = state => {
   return {
       user: getUser(state),
       reposts: getUserReposts(state),
       likes: getUserLikes(state),
+      search: getSearchedTracks(state)
   };
 };
 

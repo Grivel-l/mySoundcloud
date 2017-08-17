@@ -35,7 +35,8 @@ class Tracklist extends Component {
   renderTracks() {
     return (
       <ScrollView>
-        {this.props.tracks.map(({track}, index) => {
+        {this.props.tracks.map((fullTrack, index) => {
+          const track = fullTrack.track || fullTrack;
           if (track !== undefined) {
             return (
               <TouchableHighlight
@@ -112,7 +113,8 @@ class Tracklist extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    alignSelf: 'stretch'
   },
   track: {
     marginBottom: 10,
