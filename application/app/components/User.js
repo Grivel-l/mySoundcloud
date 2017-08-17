@@ -23,25 +23,33 @@ class User extends Component {
     return content.substring(0, 1).toUpperCase() + content.substring(1);
   }
 
-  renderCategorie(categorie) {
-    return (
-      <TouchableHighlight
-        style={styles.categorie}
-        underlayColor={'transparent'}
-        onPress={() => {
-          if (this.state.categorie !== categorie) {
-            this.setState({categorie});
-          }
-        }}
-      >
-        <Text style={[
-          styles.categorieText,
-          categorie === this.state.categorie && {color: Colors.mainColor}
-        ]}>
-          {this.toUpperCase(categorie)}
-        </Text>
-      </TouchableHighlight>
-    )
+  renderCategories() {
+    const categories = ['reposts', 'likes'];
+    return categories.map((categorie, index) => {
+      return (
+        <TouchableHighlight
+          key={`Categorie${index}`}
+          style={[
+            styles.categorie,
+            index === 0 && {marginLeft: 0},
+            categories[index + 1] === undefined && {marginRight: 0}
+          ]}
+          underlayColor={Colors.lightBlack}
+          onPress={() => {
+            if (this.state.categorie !== categorie) {
+              this.setState({categorie});
+            }
+          }}
+        >
+          <Text style={[
+            styles.categorieText,
+            categorie === this.state.categorie && {color: Colors.mainColor}
+          ]}>
+            {this.toUpperCase(categorie)}
+          </Text>
+        </TouchableHighlight>
+      );
+    });
   }
 
   render() {
@@ -62,8 +70,7 @@ class User extends Component {
             </View>
         }
         <View style={styles.categories}>
-          {this.renderCategorie('reposts')}
-          {this.renderCategorie('likes')}
+          {this.renderCategories()}
         </View>
         <Tracklist tracks={this.props[this.state.categorie]} />
       </View>
@@ -87,7 +94,12 @@ const styles = StyleSheet.create({
   categorie: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: Colors.lightBlack,
+    margin: 5,
+    marginBottom: 0,
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5
   },
   categorieText: {
     fontWeight: 'bold',
