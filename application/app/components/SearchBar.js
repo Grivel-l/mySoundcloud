@@ -23,7 +23,9 @@ class SearchBar extends Component {
   }
 
   search() {
-    this.props.searchMusic(this.input._lastNativeText);
+    if (this.input._lastNativeText !== undefined && this.input._lastNativeText.length > 0) {
+      this.props.searchMusic(this.input._lastNativeText);
+    }
   }
 
   renderBackButton() {
