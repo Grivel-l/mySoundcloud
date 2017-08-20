@@ -27,7 +27,7 @@ function* getUser() {
   const user = yield call(getUserAPI);
   const reposts = yield call(getUserRepostsAPI, {offset: 0, limit: LIMIT});
   const likes = yield call(getUserLikesAPI, {offset: 0, limit: LIMIT});
-  console.log('Liikes', likes);
+
   yield all([
     put({type: USER_GETTED, payload: {user}}),
     put({type: USER_REPOSTS_GETTED, payload: {reposts}}),
