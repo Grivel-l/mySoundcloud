@@ -16,7 +16,11 @@ import {
 
 const LIMIT = 15;
 const getOffset = url => {
-  return new URLSearchParams(new URL(url).search).get('offset');
+  if (url === null) {
+    return 0;
+  }
+  url = url.split('offset=')[1];
+  return url.split('&')[0];
 };
 
 function* getUser() {
