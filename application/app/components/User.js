@@ -58,6 +58,7 @@ class User extends Component {
     if (this.state.categorie === 'reposts') {
       this.props.loadReposts(uuid);
     } else {
+      console.log('Uuid', uuid);
       this.props.loadLikes(uuid);
     }
   }

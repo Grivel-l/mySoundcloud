@@ -26,6 +26,7 @@ const users = (state = initialState, {type, payload}) => {
         reposts: [...state.reposts, ...payload.reposts]
       }
     case USER_LIKES_GETTED:
+      console.log('NextOffset', payload);
       return {
         ...state,
         likes: {
