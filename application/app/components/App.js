@@ -4,7 +4,7 @@ import {
   StyleSheet
 } from 'react-native';
 
-import User from './User';
+import User from '../containers/user';
 import SearchBar from '../containers/searchbar';
 import Tracklist from '../containers/tracklist';
 
@@ -14,13 +14,13 @@ class App extends Component {
   }
 
   renderContent() {
-    console.log('This.props.reposts', this.props.reposts);
     if (this.props.search.length === 0) {
       return (
         <User
           user={this.props.user}
           reposts={this.props.reposts}
           likes={this.props.likes}
+          likesNextOffset={this.props.likesNextOffset}
         />
       );
     } else {

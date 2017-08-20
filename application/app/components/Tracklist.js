@@ -4,7 +4,7 @@ import {
   Text,
   StyleSheet,
   Image,
-  ScrollView,
+  FlatList,
   TouchableHighlight,
   Modal
 } from 'react-native';
@@ -19,7 +19,9 @@ class Tracklist extends Component {
       showModal: false
     };
 
+    this.page = 0;
     this.focusedTrack = null;
+
     this.sendToServer = this.sendToServer.bind(this, this.focusedTrack);
   }
 
@@ -34,13 +36,19 @@ class Tracklist extends Component {
 
   renderTracks() {
     return (
-      <ScrollView>
-        {this.props.tracks.map((fullTrack, index) => {
-          const track = fullTrack.track || fullTrack;
+      <FlatList
+        data={this.props.tracks}
+        keyExtractor={(track, index) => `Track${index}`}
+        onEndReached={(yo, index) => {
+          this.page += 1;
+          this.props.loadNextItems(this.props.tracks[this.props.tracks.length - 1].uuid || this.props.nextOffset);
+        }}
+        onEndReachedThreshold={0.1}
+        renderItem={({item}) => {
+          const track = item.track || item;
           if (track !== undefined && track.type !== 'playlist') {
             return (
               <TouchableHighlight
-                key={`Track${index}`}
                 style={styles.track}
                 onPress={this.openModal.bind(this, track)}
                 underlayColor={'transparent'}
@@ -66,9 +74,9 @@ class Tracklist extends Component {
               </TouchableHighlight>
             );
           }
-        })}
-      </ScrollView>
-    )
+        }}
+      />
+    );
   }
 
   sendToServer() {
