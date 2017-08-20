@@ -23,10 +23,19 @@ class Tracklist extends Component {
     this.focusedTrack = null;
 
     this.sendToServer = this.sendToServer.bind(this, this.focusedTrack);
+    this.renderLoader = this.renderLoader.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     return this.props.tracks.length !== nextProps.tracks.length || this.state.showModal !== nextState.showModal;
+  }
+
+  renderLoader() {
+    return (
+      <View style={styles.loader}>
+        <Text style={{fontSize: 30}}>{'Loading...'}</Text>
+      </View>
+    );
   }
 
   openModal(track) {
@@ -39,10 +48,11 @@ class Tracklist extends Component {
       <FlatList
         data={this.props.tracks}
         keyExtractor={(track, index) => `Track${index}`}
-        onEndReached={(yo, index) => {
+        onEndReached={(track, index) => {
           this.page += 1;
           this.props.loadNextItems(this.props.tracks[this.props.tracks.length - 1].uuid || this.props.nextOffset);
         }}
+        ListFooterComponent={this.renderLoader}
         onEndReachedThreshold={0.1}
         renderItem={({item}) => {
           const track = item.track || item;
@@ -169,6 +179,11 @@ const styles = StyleSheet.create({
   modalText: {
     fontSize: 30,
     fontWeight: 'bold'
+  },
+  loader: {
+    height: 80,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
 
