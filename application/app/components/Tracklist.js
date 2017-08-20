@@ -35,8 +35,7 @@ class Tracklist extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return this.props.tracks.length !== nextProps.tracks.length ||
-      this.state.showModal !== nextState.showModal;
+    return this.props.tracks.length !== nextProps.tracks.length || this.state.showModal !== nextState.showModal;
   }
 
   renderLoader() {
