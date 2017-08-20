@@ -21,9 +21,17 @@ class Tracklist extends Component {
 
     this.page = 0;
     this.focusedTrack = null;
+    this.flatList = null;
 
     this.sendToServer = this.sendToServer.bind(this, this.focusedTrack);
     this.renderLoader = this.renderLoader.bind(this);
+    this.endReached = this.endReached.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.reRender !== nextProps.reRender) {
+      this.flatList.scrollToIndex({index: 0});
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -43,17 +51,24 @@ class Tracklist extends Component {
     this.setState({showModal: true});
   }
 
+  endReached(track, index) {
+    this.page += 1;
+    this.props.loadNextItems(this.props.tracks[this.props.tracks.length - 1].uuid || this.props.nextOffset);
+  }
+
   renderTracks() {
     return (
       <FlatList
         data={this.props.tracks}
         keyExtractor={(track, index) => `Track${index}`}
-        onEndReached={(track, index) => {
-          this.page += 1;
-          this.props.loadNextItems(this.props.tracks[this.props.tracks.length - 1].uuid || this.props.nextOffset);
-        }}
+        onEndReached={this.endReached}
         ListFooterComponent={this.renderLoader}
         onEndReachedThreshold={0.1}
+        ref={ref => {
+          if (this.flatList === null) {
+            this.flatList = ref;
+          }
+        }}
         renderItem={({item}) => {
           const track = item.track || item;
           if (track !== undefined && track.type !== 'playlist') {

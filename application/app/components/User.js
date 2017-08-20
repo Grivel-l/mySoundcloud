@@ -86,6 +86,7 @@ class User extends Component {
           tracks={this.props[this.state.categorie]}
           loadNextItems={this.loadNextItems}
           nextOffset={this.props.likesNextOffset}
+          reRender={this.state.categorie === 'reposts'}
         />
       </View>
     );
