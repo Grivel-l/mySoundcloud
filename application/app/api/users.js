@@ -5,12 +5,11 @@ export const getUserAPI = () => {
   return fetchAPI(`${API_URL}/users/${USER_ID}`);
 };
 
-export const getUserRepostsAPI = ({page, limit}) => {
-  return fetchAPI(`${API_V2_URL}/profile/soundcloud:users:${USER_ID}?limit=${limit}&offset=${page * limit}`)
+export const getUserRepostsAPI = ({offset, limit}) => {
+  return fetchAPI(`${API_V2_URL}/stream/users/${USER_ID}?limit=${limit}&offset=${offset}`)
   .then(reposts => reposts.collection);
 }
 
-export const getUserLikesAPI = ({page, limit}) => {
-  return fetchAPI(`${API_V2_URL}/users/${USER_ID}/likes?limit=${limit}&offset=${page * limit}`)
-  .then(likes => likes.collection);
+export const getUserLikesAPI = ({offset, limit}) => {
+  return fetchAPI(`${API_V2_URL}/users/${USER_ID}/likes?limit=${limit}&offset=${offset}`);
 }

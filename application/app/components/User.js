@@ -17,6 +17,8 @@ class User extends Component {
     this.state = {
       categorie: 'reposts'
     };
+
+    this.loadNextItems = this.loadNextItems.bind(this);
   }
 
   toUpperCase(content) {
@@ -52,6 +54,14 @@ class User extends Component {
     });
   }
 
+  loadNextItems(uuid) {
+    if (this.state.categorie === 'reposts') {
+      this.props.loadReposts(uuid);
+    } else {
+      this.props.loadLikes(uuid);
+    }
+  }
+
   render() {
     const {user} = this.props;
     return (
@@ -72,7 +82,11 @@ class User extends Component {
         <View style={styles.categories}>
           {this.renderCategories()}
         </View>
-        <Tracklist tracks={this.props[this.state.categorie]} />
+        <Tracklist
+          tracks={this.props[this.state.categorie]}
+          loadNextItems={this.loadNextItems}
+          nextOffset={this.props.likesNextOffset}
+        />
       </View>
     );
   }

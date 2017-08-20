@@ -7,7 +7,10 @@ import {
 const initialState = {
   user: {},
   reposts: [],
-  likes: []
+  likes: {
+    items: [],
+    nextOffset: null
+  }
 };
 
 const users = (state = initialState, {type, payload}) => {
@@ -25,7 +28,10 @@ const users = (state = initialState, {type, payload}) => {
     case USER_LIKES_GETTED:
       return {
         ...state,
-        likes: [...state.likes, ...payload.likes]
+        likes: {
+          items: [...state.likes.items, ...payload.likes],
+          nextOffset: payload.nextOffset
+        }
       }
     default:
       return state;

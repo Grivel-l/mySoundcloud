@@ -4,7 +4,8 @@ import App from '../components/App';
 import {
   getUser,
   getUserReposts,
-  getUserLikes
+  getUserLikes,
+  getUserNextLikes
 } from '../selectors/users';
 import {getSearchedTracks} from '../selectors/musics';
 
@@ -13,6 +14,7 @@ const mapStateToProps = state => {
       user: getUser(state),
       reposts: getUserReposts(state),
       likes: getUserLikes(state),
+      likesNextOffset: getUserNextLikes(state),
       search: getSearchedTracks(state)
   };
 };
