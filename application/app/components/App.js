@@ -7,7 +7,9 @@ import {
 import User from '../containers/user';
 import SearchBar from '../containers/searchbar';
 import Tracklist from '../containers/tracklist';
+import Footer from './Footer';
 
+const FOOTER_HEIGHT = 50;
 class App extends Component {
   constructor(props) {
     super(props);
@@ -37,6 +39,7 @@ class App extends Component {
       <View style={styles.container}>
         <SearchBar showBack={this.props.search.length > 0} />
         {this.renderContent()}
+        <Footer height={FOOTER_HEIGHT} />
       </View>
     );
   }
@@ -46,7 +49,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingBottom: FOOTER_HEIGHT
   },
   searchContainer: {
     padding: 10,
