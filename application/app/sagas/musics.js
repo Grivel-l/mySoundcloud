@@ -12,7 +12,11 @@ import {
 } from '../actions/musics';
 
 function* sendMusic({payload}) {
-  yield call(sendMusicAPI, payload);
+  try {
+    yield call(sendMusicAPI, payload);
+  } catch (error) {
+    console.log('Error', error);
+  }
 }
 
 function* sendMusicWatcher() {
