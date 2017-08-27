@@ -8,3 +8,7 @@ export const sendMusicAPI = ({idTrack}) => {
 export const searchMusicAPI = ({query}) => {
   return fetchAPI(`${API_URL}/tracks?q=${query}`);
 };
+
+export const actionButtonAPI = () => {
+  return fetchAPI(`http://${SERVER_IP}/music/action`);
+};
