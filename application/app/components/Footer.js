@@ -13,7 +13,7 @@ class Footer extends Component {
     super(props);
 
     this.state = {
-      actionStatus: 'play',
+      isPlaying: false,
       isDisabled: false
     };
 
@@ -24,7 +24,7 @@ class Footer extends Component {
     if (!this.state.isDisabled) {
       this.props.actionButton();
       this.setState({
-        actionStatus: this.state.actionStatus === 'play' ? 'pause' : 'play',
+        isPlaying: !this.state.isPlaying,
         isDisabled: true
       }, () => {
         setTimeout(() => {
@@ -44,7 +44,7 @@ class Footer extends Component {
   }
 
   render() {
-    const isPlaying = this.state.actionStatus === 'play';
+    const {isPlaying} = this.state;
     return (
       <View style={[styles.container, {height: this.props.height + this.props.height / 1.5}]}>
         <View style={[styles.subContainer, {height: this.props.height}]} />

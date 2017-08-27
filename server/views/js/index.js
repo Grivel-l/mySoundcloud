@@ -1,10 +1,10 @@
 (() => {
-  let activePlayer = {
+  const activePlayer = {
     player: null,
     status: null
   };
 
-  function action(type, socket) {
+  function action(type) {
     activePlayer.status = type;
     activePlayer.player[type]();
   }
