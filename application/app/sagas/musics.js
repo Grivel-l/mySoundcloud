@@ -35,7 +35,11 @@ function* searchMusicWatcher() {
 }
 
 function* actionButton() {
-  yield call(actionButtonAPI);
+  try {
+    yield call(actionButtonAPI);
+  } catch (error) {
+    console.log('Error', error);
+  }
 }
 
 function* actionButtonWatcher() {
