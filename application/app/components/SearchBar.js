@@ -75,13 +75,13 @@ const styles = StyleSheet.create({
   },
   input: {
     width: '80%',
-    backgroundColor: Colors['lightGray'],
+    backgroundColor: Colors.lightGray,
     borderRadius: 5,
     height: '70%',
     margin: 10
   },
   searchButton: {
-    backgroundColor: Colors['mainColor'],
+    backgroundColor: Colors.mainColor,
     alignSelf: 'stretch',
     flex: 1,
     margin: 10,
