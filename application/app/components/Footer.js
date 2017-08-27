@@ -1,12 +1,39 @@
 import React, {Component} from 'react';
 import {
   View,
-  StyleSheet
+  StyleSheet,
+  TouchableHighlight
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Colors from '../styles/colors';
 
 class Footer extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      actionStatus: 'play',
+      isDisabled: false
+    };
+
+    this.actionButton = this.actionButton.bind(this);
+  }
+
+  actionButton() {
+    if (!this.state.isDisabled) {
+      this.props.actionButton();
+      this.setState({
+        actionStatus: this.state.actionStatus === 'play' ? 'pause' : 'play',
+        isDisabled: true
+      }, () => {
+        setTimeout(() => {
+          this.setState({isDisabled: false});
+        }, 300);
+      });
+    }
+  }
+
   getActionLayout() {
     const size = this.props.height * 1.5;
     return {
@@ -17,10 +44,25 @@ class Footer extends Component {
   }
 
   render() {
+    const isPlaying = this.state.actionStatus === 'play';
     return (
       <View style={[styles.container, {height: this.props.height + this.props.height / 1.5}]}>
         <View style={[styles.subContainer, {height: this.props.height}]} />
-        <View style={[styles.actionButton, this.getActionLayout()]} />
+        <TouchableHighlight
+          style={[
+            styles.actionButton,
+            this.getActionLayout(),
+            {borderColor: isPlaying ? Colors.lightBlack : Colors.mainColor}
+          ]}
+          underlayColor={Colors.lightGray}
+          onPress={this.actionButton}
+        >
+          <Icon
+            name={isPlaying ? 'pause' : 'play'}
+            size={30}
+            color={isPlaying ? Colors.lightBlack : Colors.mainColor}
+          />
+        </TouchableHighlight>
       </View>
     );
   }
@@ -51,7 +93,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     elevation: 5,
-    borderColor: Colors.lightBlack,
-    borderWidth: 8
+    borderWidth: 8,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });

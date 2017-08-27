@@ -7,7 +7,7 @@ import {
 import User from '../containers/user';
 import SearchBar from '../containers/searchbar';
 import Tracklist from '../containers/tracklist';
-import Footer from './Footer';
+import Footer from '../containers/footer';
 
 const FOOTER_HEIGHT = 50;
 class App extends Component {
