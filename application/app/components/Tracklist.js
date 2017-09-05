@@ -16,7 +16,8 @@ class Tracklist extends Component {
     super(props);
 
     this.state = {
-      showModal: false
+      showModal: false,
+      refreshing: false
     };
 
     this.page = 0;
@@ -29,8 +30,15 @@ class Tracklist extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log('Tracks length', this.props.tracks.length);
     if (this.props.reRender !== nextProps.reRender) {
-      this.flatList.scrollToIndex({index: 0});
+      if (this.flatList !== null) {
+        this.flatList.scrollToIndex({index: 0});
+      }
+    } else if (this.props.tracks.length === 0 && nextProps.tracks.length !== 0 && this.state.refreshing) {
+      this.setState({refreshing: false});
+    } else if (this.props.tracks.length > 0 && nextProps.tracks.length === 0) {
+      this.props.loadNextItems(this.props.tracks[0].uuid || this.props.nextOffset);
     }
   }
 
@@ -64,6 +72,11 @@ class Tracklist extends Component {
         onEndReached={this.endReached}
         ListFooterComponent={this.renderLoader}
         onEndReachedThreshold={0.1}
+        onRefresh={() => {
+          this.props.clearTracks();
+          this.setState({refreshing: true});
+        }}
+        refreshing={this.state.refreshing}
         ref={ref => {
           if (this.flatList === null) {
             this.flatList = ref;

@@ -26,14 +26,25 @@ const getOffset = url => {
 function* getUser() {
   try {
     const user = yield call(getUserAPI);
-    const reposts = yield call(getUserRepostsAPI, {offset: 0, limit: LIMIT});
-    const likes = yield call(getUserLikesAPI, {offset: 0, limit: LIMIT});
+    yield put({type: USER_GETTED, payload: {user}});
+  } catch (error) {
+    console.log('Error', error);
+  }
+}
 
-    yield all([
-      put({type: USER_GETTED, payload: {user}}),
-      put({type: USER_REPOSTS_GETTED, payload: {reposts}}),
-      put({type: USER_LIKES_GETTED, payload: {likes: likes.collection, nextOffset: getOffset(likes.next_href)}})
-    ]);
+function* getReposts() {
+  try {
+    const reposts = yield call(getUserRepostsAPI, {offset: 0, limit: LIMIT});
+    yield put({type: USER_REPOSTS_GETTED, payload: {reposts}});
+  } catch (error) {
+    console.log('Error', error);
+  }
+}
+
+function* getLikes() {
+  try {
+    const likes = yield call(getUserLikesAPI, {offset: 0, limit: LIMIT});
+    yield put({type: USER_LIKES_GETTED, payload: {likes: likes.collection, nextOffset: getOffset(likes.next_href)}});
   } catch (error) {
     console.log('Error', error);
   }
@@ -68,6 +79,8 @@ function* loadLikesWatcher() {
 function* flow() {
   yield all([
     fork(getUser),
+    fork(getLikes),
+    fork(getReposts),
     fork(loadRepostsWatcher),
     fork(loadLikesWatcher)
   ]);
