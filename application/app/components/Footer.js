@@ -52,15 +52,15 @@ class Footer extends Component {
           style={[
             styles.actionButton,
             this.getActionLayout(),
-            {borderColor: isPlaying ? Colors.lightBlack : Colors.mainColor}
+            {borderColor: isPlaying ? Colors.mainColor : Colors.lightBlack}
           ]}
           underlayColor={Colors.lightGray}
           onPress={this.actionButton}
         >
           <Icon
-            name={isPlaying ? 'pause' : 'play'}
+            name={isPlaying ? 'play' : 'pause'}
             size={30}
-            color={isPlaying ? Colors.lightBlack : Colors.mainColor}
+            color={isPlaying ? Colors.mainColor : Colors.lightBlack}
           />
         </TouchableHighlight>
       </View>
