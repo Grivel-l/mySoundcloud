@@ -27,23 +27,37 @@ class Tracklist extends Component {
     this.sendToServer = this.sendToServer.bind(this, this.focusedTrack);
     this.renderLoader = this.renderLoader.bind(this);
     this.endReached = this.endReached.bind(this);
+    this.refresh = this.refresh.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('Tracks length', this.props.tracks.length);
-    if (this.props.reRender !== nextProps.reRender) {
-      if (this.flatList !== null) {
-        this.flatList.scrollToIndex({index: 0});
+    if (this.props.tracks.length > 0 && nextProps.tracks.length === 0) {
+      this.props.loadNextItems(0);
+    }
+
+    if (this.state.refreshing) {
+      if (this.props.tracks.length === 0 && nextProps.tracks.length !== 0) {
+        this.setState({refreshing: false});
       }
-    } else if (this.props.tracks.length === 0 && nextProps.tracks.length !== 0 && this.state.refreshing) {
-      this.setState({refreshing: false});
-    } else if (this.props.tracks.length > 0 && nextProps.tracks.length === 0) {
-      this.props.loadNextItems(this.props.tracks[0].uuid || this.props.nextOffset);
+    } else {
+      if (this.props.reRender !== nextProps.reRender) {
+        if (this.flatList !== null) {
+          this.flatList.scrollToOffset({offset: 0});
+        }
+      }
     }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return this.props.tracks.length !== nextProps.tracks.length || this.state.showModal !== nextState.showModal;
+    return this.props.tracks.length !== nextProps.tracks.length ||
+      this.state.showModal !== nextState.showModal || 
+      this.state.refreshing !== nextState.refreshing;
+  }
+
+  refresh() {
+    this.flatList = null;
+    this.props.clearTracks();
+    this.setState({refreshing: true});
   }
 
   renderLoader() {
@@ -72,10 +86,7 @@ class Tracklist extends Component {
         onEndReached={this.endReached}
         ListFooterComponent={this.renderLoader}
         onEndReachedThreshold={0.1}
-        onRefresh={() => {
-          this.props.clearTracks();
-          this.setState({refreshing: true});
-        }}
+        onRefresh={this.refresh}
         refreshing={this.state.refreshing}
         ref={ref => {
           if (this.flatList === null) {
