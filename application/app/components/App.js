@@ -28,7 +28,10 @@ class App extends Component {
     } else {
       return (
         <View style={styles.searchContainer}>
-          <Tracklist tracks={this.props.search} />
+          <Tracklist
+            tracks={this.props.search}
+            interactive={false}
+          />
         </View>
       );
     }

@@ -88,6 +88,7 @@ class User extends Component {
           nextOffset={this.props.likesNextOffset}
           reRender={this.state.categorie === 'reposts'}
           clearTracks={this.props[`clear${this.getCategorie()}`]}
+          interactive={true}
         />
       </View>
     );
