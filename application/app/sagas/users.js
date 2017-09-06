@@ -26,14 +26,10 @@ const getOffset = url => {
 function* getUser() {
   try {
     const user = yield call(getUserAPI);
-    const reposts = yield call(getUserRepostsAPI, {offset: 0, limit: LIMIT});
-    const likes = yield call(getUserLikesAPI, {offset: 0, limit: LIMIT});
+    yield call(loadReposts, {payload: 0});
+    yield call(loadLikes, {payload: 0});
 
-    yield all([
-      put({type: USER_GETTED, payload: {user}}),
-      put({type: USER_REPOSTS_GETTED, payload: {reposts}}),
-      put({type: USER_LIKES_GETTED, payload: {likes: likes.collection, nextOffset: getOffset(likes.next_href)}})
-    ]);
+    yield put({type: USER_GETTED, payload: {user}});
   } catch (error) {
     console.log('Error', error);
   }
