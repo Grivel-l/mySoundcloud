@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableHighlight
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Colors from '../styles/colors';
 
@@ -36,7 +37,11 @@ class SearchBar extends Component {
           style={[styles.searchButton, {marginRight: 0}]}
           onPress={this.back}
         >
-          <View />
+          <Icon
+            name={'arrow-left'}
+            size={20}
+            color={Colors.lightGray}
+          />
         </TouchableHighlight>
       );
     }
@@ -59,7 +64,11 @@ class SearchBar extends Component {
           style={[styles.searchButton, {marginLeft: 0}]}
           onPress={this.search}
         >
-          <View />
+          <Icon
+            name={'search'}
+            size={20}
+            color={Colors.lightGray}
+          />
         </TouchableHighlight>
       </View>
     );
@@ -86,7 +95,9 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     flex: 1,
     margin: 10,
-    borderRadius: 5
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
 
