@@ -54,12 +54,12 @@ class User extends Component {
     });
   }
 
+  getCategorie() {
+    return this.state.categorie.substring(0, 1).toUpperCase() + this.state.categorie.substring(1);
+  }
+
   loadNextItems(uuid) {
-    if (this.state.categorie === 'reposts') {
-      this.props.loadReposts(uuid);
-    } else {
-      this.props.loadLikes(uuid);
-    }
+    this.props[`load${this.getCategorie()}`](uuid);
   }
 
   render() {
@@ -87,6 +87,7 @@ class User extends Component {
           loadNextItems={this.loadNextItems}
           nextOffset={this.props.likesNextOffset}
           reRender={this.state.categorie === 'reposts'}
+          clearTracks={this.props[`clear${this.getCategorie()}`]}
         />
       </View>
     );
