@@ -55,17 +55,23 @@ class Tracklist extends Component {
   }
 
   refresh() {
-    this.flatList = null;
-    this.props.clearTracks();
-    this.setState({refreshing: true});
+    if (this.props.interactive) {
+      this.flatList = null;
+      this.props.clearTracks();
+      this.setState({refreshing: true});
+    }
   }
 
   renderLoader() {
-    return (
-      <View style={styles.loader}>
-        <Text style={{fontSize: 30}}>{'Loading...'}</Text>
-      </View>
-    );
+    if (this.props.interactive) {
+      return (
+        <View style={styles.loader}>
+          <Text style={{fontSize: 30}}>{'Loading...'}</Text>
+        </View>
+      );
+    } else {
+      return null;
+    }
   }
 
   openModal(track) {
@@ -74,8 +80,10 @@ class Tracklist extends Component {
   }
 
   endReached(track, index) {
-    this.page += 1;
-    this.props.loadNextItems(this.props.tracks[this.props.tracks.length - 1].uuid || this.props.nextOffset);
+    if (this.props.interactive) {
+      this.page += 1;
+      this.props.loadNextItems(this.props.tracks[this.props.tracks.length - 1].uuid || this.props.nextOffset);
+    }
   }
 
   renderTracks() {

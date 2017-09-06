@@ -19,6 +19,7 @@ class SearchBar extends Component {
   }
 
   back() {
+    this.input.clear();
     this.props.resetSearch();
   }
 
