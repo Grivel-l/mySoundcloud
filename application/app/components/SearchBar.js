@@ -27,6 +27,7 @@ class SearchBar extends Component {
   search() {
     if (this.input._lastNativeText !== undefined && this.input._lastNativeText.length > 0) {
       this.props.searchMusic(this.input._lastNativeText);
+      this.props.navigation.navigate('SearchScreen');
     }
   }
 

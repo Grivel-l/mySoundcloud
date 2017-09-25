@@ -6,7 +6,6 @@ import {
 
 import User from '../containers/user';
 import SearchBar from '../containers/searchbar';
-import Tracklist from '../containers/tracklist';
 import Footer from '../containers/footer';
 
 const FOOTER_HEIGHT = 50;
@@ -16,31 +15,22 @@ class App extends Component {
   }
 
   renderContent() {
-    if (this.props.search.length === 0) {
-      return (
-        <User
-          user={this.props.user}
-          reposts={this.props.reposts}
-          likes={this.props.likes}
-          likesNextOffset={this.props.likesNextOffset}
-        />
-      );
-    } else {
-      return (
-        <View style={styles.searchContainer}>
-          <Tracklist
-            tracks={this.props.search}
-            interactive={false}
-          />
-        </View>
-      );
-    }
+    return (
+      <User
+        user={this.props.user}
+        reposts={this.props.reposts}
+        likes={this.props.likes}
+        likesNextOffset={this.props.likesNextOffset}
+      />
+    );
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <SearchBar showBack={this.props.search.length > 0} />
+        <SearchBar
+          navigation={this.props.navigation}
+        />
         {this.renderContent()}
         <Footer height={FOOTER_HEIGHT} />
       </View>
@@ -54,11 +44,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: FOOTER_HEIGHT
-  },
-  searchContainer: {
-    padding: 10,
-    flex: 1,
-    alignSelf: 'stretch'
   }
 });
 
