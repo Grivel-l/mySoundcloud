@@ -28,9 +28,7 @@ class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <SearchBar
-          navigation={this.props.navigation}
-        />
+        <SearchBar navigation={this.props.navigation} />
         {this.renderContent()}
         <Footer height={FOOTER_HEIGHT} />
       </View>
